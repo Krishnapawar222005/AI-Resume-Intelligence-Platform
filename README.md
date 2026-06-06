@@ -1,5 +1,11 @@
 # AI Resume Intelligence Platform
+# AI Resume Intelligence Platform
 
+## Live Demo
+https://ai-resume-intelligence-platform-datxqmvwz4baztnjviyp7k.streamlit.app/
+
+## GitHub Repository
+https://github.com/Krishnapawar222005/AI-Resume-Intelligence-Platform
 ## Overview
 
 AI Resume Intelligence Platform is a web application that analyzes resumes, calculates ATS scores, matches resumes against job descriptions, identifies missing skills, and generates improvement recommendations.
