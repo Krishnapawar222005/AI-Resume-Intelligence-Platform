@@ -21,6 +21,29 @@ st.set_page_config(
     page_title="AI Resume Intelligence Platform",
     layout="wide"
 )
+st.markdown("""
+<style>
+
+.stApp {
+    background: linear-gradient(
+        135deg,
+        #000814,
+        #001d3d,
+        #240046,
+        #10002b
+    );
+    background-size: 400% 400%;
+    animation: galaxy 15s ease infinite;
+}
+
+@keyframes galaxy {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 st.title("🚀 AI Resume Intelligence Platform")
 st.error("NEW VERSION LOADED")
