@@ -1,5 +1,6 @@
 import streamlit as st
 import pdfplumber
+import google.generativeai as genai
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -8,7 +9,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from reportlab.pdfgen import canvas
 from io import BytesIO
+genai.configure(
+    api_key=st.secrets["GEMINI_API_KEY"]
+)
 
+model = genai.GenerativeModel(
+      "gemini-2.5-flash"
+)
 
 st.set_page_config(
     page_title="AI Resume Intelligence Platform",
@@ -16,8 +23,15 @@ st.set_page_config(
 )
 
 st.title("🚀 AI Resume Intelligence Platform")
+st.error("NEW VERSION LOADED")
 st.write("Advanced Resume Analysis, ATS Scoring & Job Matching")
+st.subheader("🤖 AI TEST")
 
+user_question = st.text_input(
+    "Ask anything"
+)
+
+st.write("AI SECTION VISIBLE")
 SKILLS = [
     "python",
     "java",
@@ -182,7 +196,7 @@ job_description = st.text_area(
 )
 
 if uploaded_resume:
-
+    st.write("STEP 1")
     resume_text = extract_text(uploaded_resume)
 
     found_skills = extract_skills(resume_text)
@@ -401,3 +415,38 @@ if uploaded_resume:
         resume_text,
         height=300
     )
+    st.write("TEST AI SECTION")
+    st.subheader("🤖 Resume AI Assistant")
+
+    user_question = st.text_input(
+        "Ask anything about your resume"
+    )
+
+    if user_question:
+
+        prompt = f"""
+        Resume Content:
+        {resume_text}
+
+        Job Description:
+        {job_description}
+
+        User Question:
+        {user_question}
+
+        Answer based on the resume and job description.
+        """
+
+        with st.spinner("AI is analyzing..."):
+
+            try:
+                response = model.generate_content(
+                    prompt
+                )
+
+                st.write(response.text)
+
+            except Exception as e:
+                st.error(
+                    "AI quota exceeded. Please wait 20 seconds and try again."
+                )
